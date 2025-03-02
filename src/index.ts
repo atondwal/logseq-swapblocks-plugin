@@ -8,6 +8,7 @@ import {
 const main = () => {
   console.log("Swap plugin loaded.");
 
+  // Register block context menu items
   logseq.Editor.registerBlockContextMenuItem(
     "Swap ref/original blocks",
     async (e) => {
@@ -26,6 +27,19 @@ const main = () => {
     "Apply children as block references",
     async (e) => {
       childrenWithBlockReferences(e);
+    }
+  );
+  
+  // Register slash command for swap blocks
+  logseq.Editor.registerSlashCommand(
+    "Swap with original block",
+    async () => {
+      const currentBlock = await logseq.Editor.getCurrentBlock();
+      if (currentBlock) {
+        swapBlocks(currentBlock);
+      } else {
+        logseq.App.showMsg("Please position your cursor in a block reference first");
+      }
     }
   );
 };

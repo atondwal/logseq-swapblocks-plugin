@@ -5,7 +5,7 @@ import {
 } from "@logseq/libs/dist/LSPlugin.user";
 
 export const swapBlocks = async (e: any) => {
-  // Get reference block
+  // Get reference block - works with block object or event object (both have uuid)
   const refBlock = await logseq.Editor.getBlock(e.uuid);
 
   // Check if parent is the page
